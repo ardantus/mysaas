@@ -65,7 +65,37 @@ A comprehensive multi-tenant online store platform built with Laravel backend an
 
 ## Setup Instructions
 
-### Backend Setup
+### 🐳 Quick Start with Docker (Recommended)
+
+The easiest way to get started! Docker handles all dependencies automatically.
+
+```bash
+# Clone and setup
+git clone https://github.com/ardantus/mysaas.git
+cd mysaas
+
+# Start with Docker
+make install
+
+# Or manually:
+docker-compose up -d
+docker-compose exec backend php artisan key:generate
+docker-compose exec backend php artisan migrate
+```
+
+Access the application:
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **PhpMyAdmin**: http://localhost:8080
+- **MailHog**: http://localhost:8025
+
+📚 **Full Docker documentation**: See [DOCKER.md](DOCKER.md)
+
+### Manual Setup (Alternative)
+
+If you prefer manual installation without Docker:
+
+#### Backend Setup
 
 1. Install dependencies:
 ```bash
