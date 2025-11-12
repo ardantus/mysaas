@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# Documentation
+*.md
+docs/
+
+# CI/CD
+.github/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Tests
+tests/
+*.test
+*.spec
+
+# Temp files
+tmp/
+temp/
+.DS_Store
+Thumbs.db
