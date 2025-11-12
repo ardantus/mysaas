@@ -51,3 +51,4 @@ Thumbs.db
 docker-compose.override.yml
 .docker/
 *.sql
+!docker/mysql/init/*.sql
