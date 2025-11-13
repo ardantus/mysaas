@@ -52,9 +52,9 @@ class OrderController extends Controller
         $sessionId = $request->session()->getId();
         $cart = Cart::where('session_id', $sessionId)->first();
 
-        if (!$cart || $cart->items->isEmpty()) {
+        if (! $cart || $cart->items->isEmpty()) {
             return response()->json([
-                'error' => 'Cart is empty'
+                'error' => 'Cart is empty',
             ], 400);
         }
 
@@ -67,7 +67,7 @@ class OrderController extends Controller
 
             // Create order
             $order = Order::create([
-                'order_number' => 'ORD-' . time() . '-' . rand(1000, 9999),
+                'order_number' => 'ORD-'.time().'-'.rand(1000, 9999),
                 'customer_name' => $validated['customer_name'],
                 'customer_phone' => $validated['customer_phone'],
                 'customer_email' => $validated['customer_email'] ?? null,
@@ -115,9 +115,10 @@ class OrderController extends Controller
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json([
                 'error' => 'Failed to create order',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 500);
         }
     }
@@ -128,6 +129,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load('items.product');
+
         return response()->json($order);
     }
 
@@ -171,4 +173,3 @@ class OrderController extends Controller
         ]);
     }
 }
-

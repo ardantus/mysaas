@@ -144,8 +144,11 @@ onMounted(async () => {
     loading.value = true
     const response = await productApi.get(Number(route.params.id))
     product.value = response.data
-    if (product.value.images && product.value.images.length > 0) {
-      selectedImage.value = product.value.images[0]
+    if (product.value && product.value.images && product.value.images.length > 0) {
+      const firstImage = product.value.images[0]
+      if (firstImage) {
+        selectedImage.value = firstImage
+      }
     }
   } catch (error) {
     console.error('Failed to load product:', error)

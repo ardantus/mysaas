@@ -7,7 +7,6 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -17,7 +16,7 @@ class CartController extends Controller
     protected function getCart(Request $request): Cart
     {
         $sessionId = $request->session()->getId();
-        
+
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
             ['user_id' => $request->user()?->id]
@@ -54,7 +53,7 @@ class CartController extends Controller
 
         if ($product->stock < $validated['quantity']) {
             return response()->json([
-                'error' => 'Insufficient stock'
+                'error' => 'Insufficient stock',
             ], 400);
         }
 
@@ -93,7 +92,7 @@ class CartController extends Controller
 
         if ($item->product->stock < $validated['quantity']) {
             return response()->json([
-                'error' => 'Insufficient stock'
+                'error' => 'Insufficient stock',
             ], 400);
         }
 
@@ -114,7 +113,7 @@ class CartController extends Controller
     {
         $cart = $item->cart;
         $item->delete();
-        
+
         $cart->load('items.product');
 
         return response()->json([
@@ -136,4 +135,3 @@ class CartController extends Controller
         ]);
     }
 }
-
