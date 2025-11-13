@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
@@ -16,8 +17,14 @@ use App\Http\Controllers\Api\OrderController;
 
 // Central API routes (main domain)
 Route::prefix('v1')->group(function () {
+    // Auth routes
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth');
+    Route::get('user', [AuthController::class, 'user'])->middleware('auth');
+    
     // Store management routes (for store owners)
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::apiResource('stores', StoreController::class);
     });
 });
@@ -49,7 +56,7 @@ Route::middleware(['tenant'])->prefix('v1')->group(function () {
     });
     
     // Store owner routes (authenticated)
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         // Category management
         Route::apiResource('admin/categories', CategoryController::class)->except(['index', 'show']);
         
