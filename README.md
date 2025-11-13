@@ -4,6 +4,11 @@ A comprehensive multi-tenant online store platform built with Laravel backend an
 
 ## Features
 
+### Authentication
+- User registration and login
+- Session-based authentication
+- Protected routes and API endpoints
+
 ### Multi-Tenancy
 - Each store has its own subdomain/domain
 - Separate database for each store
@@ -12,7 +17,8 @@ A comprehensive multi-tenant online store platform built with Laravel backend an
 
 ### Store Management
 - Store registration and setup
-- Store owner authentication
+- Store owner authentication with session management
+- Management dashboard with statistics
 - Store settings and configuration
 - WhatsApp integration for notifications
 
@@ -45,8 +51,15 @@ A comprehensive multi-tenant online store platform built with Laravel backend an
 ### Frontend (Vue.js 3)
 - TypeScript support
 - Pinia for state management
-- Vue Router for navigation
+- Vue Router for navigation with auth guards
 - Component-based architecture
+- Tailwind CSS for responsive design
+- Complete user interface:
+  - Landing page
+  - Authentication pages (login/register)
+  - Management dashboard
+  - Store management interface
+  - Product browsing and shopping cart
 
 ## Database Structure
 
