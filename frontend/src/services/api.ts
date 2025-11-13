@@ -11,14 +11,15 @@ export const api = axios.create({
   withCredentials: true,
 })
 
-// Add auth token to requests if available
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-  return config
-})
+// Auth API
+export const authApi = {
+  register: (data: { name: string; email: string; password: string; password_confirmation: string }) =>
+    api.post('/register', data),
+  login: (data: { email: string; password: string }) =>
+    api.post('/login', data),
+  logout: () => api.post('/logout'),
+  user: () => api.get('/user'),
+}
 
 // Store API
 export const storeApi = {

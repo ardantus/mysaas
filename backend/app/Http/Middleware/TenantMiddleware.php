@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\TenantService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Services\TenantService;
 
 class TenantMiddleware
 {
@@ -24,13 +24,13 @@ class TenantMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $host = $request->getHost();
-        
+
         // Get store by domain or subdomain
         $store = $this->tenantService->getStoreByDomain($host);
 
-        if (!$store) {
+        if (! $store) {
             return response()->json([
-                'error' => 'Store not found'
+                'error' => 'Store not found',
             ], 404);
         }
 
@@ -43,4 +43,3 @@ class TenantMiddleware
         return $next($request);
     }
 }
-

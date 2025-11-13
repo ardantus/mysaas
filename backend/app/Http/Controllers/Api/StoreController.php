@@ -56,7 +56,7 @@ class StoreController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to create store',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 500);
         }
     }
@@ -86,7 +86,7 @@ class StoreController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'domain' => 'nullable|string|max:255|unique:stores,domain,' . $store->id,
+            'domain' => 'nullable|string|max:255|unique:stores,domain,'.$store->id,
             'phone' => 'nullable|string|max:20',
             'whatsapp' => 'sometimes|string|max:20',
             'description' => 'nullable|string',
@@ -126,9 +126,8 @@ class StoreController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to delete store',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 500);
         }
     }
 }
-

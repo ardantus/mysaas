@@ -91,12 +91,12 @@ class CategoryController extends Controller
         // Check if category has products
         if ($category->products()->count() > 0) {
             return response()->json([
-                'error' => 'Cannot delete category with products'
+                'error' => 'Cannot delete category with products',
             ], 400);
         }
 
         $category->delete();
+
         return response()->json(null, 204);
     }
 }
-

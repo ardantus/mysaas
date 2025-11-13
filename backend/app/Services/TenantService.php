@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\Store;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class TenantService
@@ -18,7 +18,7 @@ class TenantService
         // Generate unique identifiers
         $data['slug'] = Str::slug($data['name']);
         $data['subdomain'] = $data['subdomain'] ?? $data['slug'];
-        $data['database_name'] = 'tenant_' . $data['slug'] . '_' . time();
+        $data['database_name'] = 'tenant_'.$data['slug'].'_'.time();
 
         // Create store in main database
         $store = Store::create($data);
@@ -89,7 +89,7 @@ class TenantService
 
         DB::purge('tenant');
         DB::reconnect('tenant');
-        
+
         // Set tenant as default connection for models
         Config::set('database.default', 'tenant');
     }
@@ -116,10 +116,10 @@ class TenantService
         try {
             // Drop tenant database
             DB::statement("DROP DATABASE IF EXISTS `{$store->database_name}`");
-            
+
             // Delete store record
             $store->delete();
-            
+
             return true;
         } catch (\Exception $e) {
             return false;
